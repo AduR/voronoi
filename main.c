@@ -15,6 +15,7 @@ Date        juin 2013
 #define XMAX            80
 #define YMAX            80
 #define DELTA           0
+/*#define BLACK_AND_WHITE*/ /* pour la version sans couleur */
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -28,7 +29,6 @@ Date        juin 2013
 #include "My_SDL_lib.h"
 
 void drawImg(void);
-int getPowerOfTreeFromNbColorNeeded(void); /* trop long ce nom de fonction ? :p */
 int my_pow(int nb, int pow);
 Uint32 getColorFromId(int id);
 
@@ -65,7 +65,7 @@ void drawImg(void)
     {
         for(x=0; x<YMAX; x++)
         {
-            dist = XMAX*YMAX;
+            dist = XMAX*YMAX; /* big number */
             a = 1;
             for(z=0; z<NB_POINTS; z++)
             {
@@ -88,12 +88,16 @@ void drawImg(void)
 
             if (a>1)
             {
-                /*my_blitSurface(pixel, x, y);*/
+                #ifdef BLACK_AND_WHITE
+                my_blitSurface(pixel, x, y);
+                #endif
             }
             else if (a == 1)
             {
+                #ifndef BLACK_AND_WHITE
                 SDL_FillRect(pixel, NULL, getColorFromId(idColor));
                 my_blitSurface(pixel, x, y);
+                #endif
             }
         }
     }
@@ -118,18 +122,6 @@ Uint32 getColorFromId(int id)
 {
     id++; /* pour virer le noir */
     return SDL_MapRGB(SDL_GetVideoSurface()->format, 255*((id/4)%2), 255*((id/2)%2), 255*(id%2));
-}
-
-int getPowerOfTreeFromNbColorNeeded(void)
-{
-    int power = 1;
-
-    while(my_pow(3, power) < NB_POINTS)
-    {
-        power ++;
-    }
-
-    return power;
 }
 
 int main(int argc, char *argv[])
