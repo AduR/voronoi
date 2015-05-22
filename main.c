@@ -3,7 +3,6 @@
 fichier     main.c
 But         genereateur de diagrammes de voronoi
 Auteur      Adrien du Ranquet
-Contact     adrien.duranquet@laposte.net
 Date        juin 2013
 */
 
