@@ -3,7 +3,6 @@
 fichier     My_SDL_lib.c
 But         diverses fonctions bien pratiques
 Auteur      Adrien du Ranquet
-Contact     adrien.duranquet@laposte.net
 Date        mars 2013
 */
 
